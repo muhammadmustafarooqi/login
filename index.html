@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #Welcomepage {
+            font-size: 2.5rem;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        #logoutButton {
+            font-size: 1rem;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        #logoutButton:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1 id="Welcomepage">Hello</h1>
+    <button id="logoutButton" class="hidden">Logout</button>
+
+    <script>
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (user) {
+            document.getElementById("Welcomepage").innerHTML = `Hello, ${user.name}`;
+            document.getElementById("logoutButton").classList.remove("hidden");
+        } else {
+            document.getElementById("Welcomepage").innerHTML = `Hello, Please <a href="./login.html">login</a>`;
+        }
+
+        document.getElementById("logoutButton").addEventListener("click", function () {
+            localStorage.removeItem("user");
+            window.location.href = "./login.html";
+        });
+    </script>
+</body>
+</html>
